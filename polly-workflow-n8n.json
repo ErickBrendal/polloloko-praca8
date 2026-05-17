@@ -1,0 +1,300 @@
+{
+  "name": "Polly · Atendimento Pollo Loko Praça 8",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "polloloko-praca8",
+        "options": {}
+      },
+      "id": "webhook-001",
+      "name": "Webhook WAHA",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [-400, 200]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            { "id": "a1", "name": "chat ID", "value": "={{ $json.body.payload.from }}", "type": "string" },
+            { "id": "a2", "name": "push name", "value": "={{ $json.body.payload._data?.notifyName || $json.body.payload.fromName || 'Cliente' }}", "type": "string" },
+            { "id": "a3", "name": "Mensagem", "value": "={{ $json.body.payload.body }}", "type": "string" },
+            { "id": "a4", "name": "session", "value": "default", "type": "string" },
+            { "id": "a5", "name": "messageType", "value": "={{ $json.body.payload.hasMedia ? 'media' : 'text' }}", "type": "string" }
+          ]
+        },
+        "options": {}
+      },
+      "id": "dados-001",
+      "name": "Dados",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [-200, 200]
+    },
+    {
+      "parameters": {
+        "operation": "push",
+        "key": "=polly:buf:{{ $('Dados').item.json['chat ID'] }}",
+        "value": "={{ $('Dados').item.json.Mensagem }}",
+        "tail": true
+      },
+      "id": "push-001",
+      "name": "push buffer",
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [0, 200]
+    },
+    {
+      "parameters": {
+        "amount": 5,
+        "unit": "seconds"
+      },
+      "id": "wait-001",
+      "name": "Wait 5s",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [200, 200]
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "propertyName": "msgs",
+        "key": "=polly:buf:{{ $('Dados').item.json['chat ID'] }}",
+        "keyType": "list"
+      },
+      "id": "get-msgs-001",
+      "name": "get msgs",
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [400, 200]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": { "caseSensitive": true, "leftValue": "", "typeValidation": "strict", "version": 2 },
+          "conditions": [{
+            "id": "filt1",
+            "leftValue": "={{ $json.msgs?.length > 0 && $json.msgs[$json.msgs.length-1] === $('Dados').item.json.Mensagem }}",
+            "rightValue": true,
+            "operator": { "type": "boolean", "operation": "true", "singleValue": true }
+          }],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "filter-001",
+      "name": "filterBuffer",
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.2,
+      "position": [600, 200]
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "key": "=polly:buf:{{ $('Dados').item.json['chat ID'] }}"
+      },
+      "id": "del-001",
+      "name": "deleteBuffer",
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [800, 200]
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [{
+            "id": "j1",
+            "name": "text",
+            "value": "={{ $('get msgs').item.json.msgs.join('\\n') }}",
+            "type": "string"
+          }]
+        },
+        "options": {}
+      },
+      "id": "junta-001",
+      "name": "junta_msgs",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [1000, 200]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.text }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "# PAPEL\nVocê é Polly, atendente digital da Pollo Loko Praça 8, em Guarulhos/SP. Receba pedidos pelo WhatsApp com energia, agilidade e tom de bairro paulistano — alegre, prático, sem firula.\n\nA marca: Pollo Loko · O Frango Frito Mais Loko da Sua Vizinhança · crocante por fora, suculento por dentro.\n\nREGRA MESTRA: máximo 4 linhas por mensagem · 1 pergunta por vez · use emoji funcional (🐔 🍟 🛵 ✅ 🔥) sem exagero.\n\n# TOM\n- Caloroso e direto: 'manda ver', 'fechou', 'tô anotando', 'já tá na cozinha'\n- Português correto mas descontraído (sem 'vc', 'tb', 'blz')\n- Use sempre o primeiro nome do cliente\n- Comemore o pedido sem ser bajulador: 'boa escolha', 'esse aí é campeão'\n\n# FLUXO DE ATENDIMENTO\n\n## Etapa 1: Saudação contextual\nBom dia (até 12h) / Boa tarde (12h-18h) / Boa noite (após 18h)\nApresente-se + ofereça ajuda. Máximo 2 linhas.\n\n## Etapa 2: Captura do pedido\nUse a tool `ler_cardapio` quando o cliente perguntar opções ou estiver indeciso.\nPropor combos populares: Combo Loko Família (R$ 89,90), Combo Solo Bagaceiro (R$ 32,90), Balde do Loko (R$ 79,90).\n\n## Etapa 3: Upsell + Cross-sell\nApós escolha do prato principal, ofereça UMA sugestão (não cascateie):\n- Pediu combo sem bebida 2L? → 'Manda um refri 2L pra mesa? Sai R$ 12,90'\n- Pediu solo? → 'Bate uma batata Loko grande junto? Crocância em outro nível, R$ 18,90'\n- Sem sobremesa? → 'Fechamento perfeito: cookie quentinho com chocolate derretendo, R$ 7,90'\n\n## Etapa 4: Confirmação de dados\nPergunte JUNTOS (em uma mensagem): nome, bairro, modo (entrega ou retirada).\nSe entrega → solicite endereço completo.\nSe retirada → informe que basta vir pegar.\n\n## Etapa 5: Forma de pagamento\nOpções: 💰 PIX (chave: praca8@polloloko.com.br) · 💳 Cartão na entrega · 💵 Dinheiro\nSe PIX, envie a chave logo após confirmar.\n\n## Etapa 6: Resumo + Confirmação\nMonte resumo enxuto:\n_Resumo do pedido_\n• 1x Combo Loko Família — R$ 89,90\n• 1x Refri 2L Coca — R$ 12,90\nSubtotal: R$ 102,80\nTaxa: R$ 6,90\n*Total: R$ 109,70*\nTempo: ~25 min\n\nConfirma? 1️⃣ Sim · 2️⃣ Quero ajustar\n\n## Etapa 7: Criar pedido\nQuando cliente confirmar com '1' ou 'sim', chame `registrar_pedido` passando todos os campos.\nResponda: '🔥 Pedido na cozinha! Te aviso quando sair pra entrega. Aguarda só {tempo} minutinhos.'\n\n## Etapa 8: NPS pós-pedido (na mesma mensagem do agradecimento)\nQuando registrar o pedido, na confirmação, inclua:\n'Antes de fechar — você indicaria a Pollo Loko Praça 8 pra um amigo? 1️⃣ Sim 🔥 · 2️⃣ Não 😕'\n\n# REGRAS DE NEGÓCIO\n- Horário: 11h às 23h todos os dias\n- Taxa entrega: R$ 6,90 (raio 6km da Praça 8)\n- Bairros atendidos: Centro, Vila Galvão, Macedo, Picanço, Cocaia, Jardim Cumbica, Vila Endres, Bonsucesso (outros: confirmar disponibilidade)\n- Tempo médio: combo 25 min · solo 18 min · só bebida 10 min\n- Mínimo entrega: R$ 25,00 (avise se carrinho menor)\n\n# TOOLS DISPONÍVEIS\n- `ler_cardapio` → lê produtos disponíveis (use quando cliente indeciso)\n- `registrar_pedido` → grava pedido na planilha (use só após cliente confirmar)\n- `consultar_cliente` → busca histórico (use quando cliente fala 'meu pedido de sempre')\n\n# ANTI-PATTERNS\n- Não enrole. Pedido bom é pedido rápido.\n- Não cascateie 3 sugestões juntas — 1 por vez.\n- Não invente itens fora do cardápio.\n- Não prometa tempo menor que o real.\n- Não fale de outras unidades Pollo Loko — você é só da Praça 8.\n\n# SE LEAD PERGUNTAR\n- 'Vocês têm X?' → Use `ler_cardapio` antes de responder\n- 'Quanto demora?' → 25 min combo · 18 min solo · 10 min só bebida\n- 'Aceita Pix?' → 'Aceitamos! Chave: praca8@polloloko.com.br'\n- 'Onde fica?' → 'Praça 8, Centro de Guarulhos. Aberto 11h-23h todo dia.'\n- 'Tem promoção?' → 'O Combo Loko Família é o queridinho, R$ 89,90 alimenta 4 pessoas'\n\n# FORMATO DE SAÍDA (JSON)\n```json\n{\n  \"mensagem\": \"resposta para o cliente, max 4 linhas\",\n  \"status\": \"saudando | montando_pedido | confirmando | pedido_criado | nps\",\n  \"itens_carrinho\": [{\"id\": \"C01\", \"qty\": 1}],\n  \"cliente_nome\": \"Carlos\",\n  \"bairro\": \"Centro\",\n  \"modo\": \"entrega | retirada\",\n  \"pagamento\": \"PIX | Cartão | Dinheiro\",\n  \"total\": 102.80,\n  \"nps_resposta\": \"1 - Sim / 2 - Não / vazio\"\n}\n```\n\nDATA/HORA ATUAL: {{ $now }}"
+        }
+      },
+      "id": "agent-001",
+      "name": "AI Agent Polly",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.1,
+      "position": [1200, 200]
+    },
+    {
+      "parameters": {
+        "model": { "__rl": true, "value": "gpt-5-mini", "mode": "list" },
+        "options": {}
+      },
+      "id": "llm-001",
+      "name": "OpenAI",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [1140, 380],
+      "credentials": {
+        "openAiApi": { "id": "REUSE_FROM_BEATRIZ", "name": "Conta da OpenAI" }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "=polly:{{ $('Dados').item.json['chat ID'] }}",
+        "contextWindowLength": 10,
+        "tableName": "polly_chat_memory"
+      },
+      "id": "mem-001",
+      "name": "Postgres Memory",
+      "type": "@n8n/n8n-nodes-langchain.memoryPostgresChat",
+      "typeVersion": 1.3,
+      "position": [1260, 380],
+      "credentials": {
+        "postgres": { "id": "REUSE_FROM_BEATRIZ", "name": "Postgres Supabase" }
+      }
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n  \"mensagem\": \"Boa noite Carlos! Sou a Polly, da Pollo Loko Praça 8. Quer dar uma olhada nos combos campeões da noite?\",\n  \"status\": \"saudando\",\n  \"itens_carrinho\": [],\n  \"cliente_nome\": \"Carlos\",\n  \"bairro\": \"\",\n  \"modo\": \"\",\n  \"pagamento\": \"\",\n  \"total\": 0,\n  \"nps_resposta\": \"\"\n}",
+        "autoFix": true
+      },
+      "id": "parser-001",
+      "name": "Structured Output Parser",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [1380, 380]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://150.230.88.196:8080/api/sendText",
+        "sendBody": true,
+        "contentType": "json",
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"session\": $('Dados').item.json[\"session\"], \"chatId\": $('Dados').item.json[\"chat ID\"], \"text\": $json.output?.mensagem || $json.output } }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": { "allowUnauthorizedCerts": true }
+      },
+      "id": "waha-001",
+      "name": "WAHA Send Text",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1500, 200],
+      "credentials": {
+        "httpHeaderAuth": { "id": "REUSE_FROM_BEATRIZ", "name": "WAHA API" }
+      },
+      "retryOnFail": true,
+      "maxTries": 3,
+      "waitBetweenTries": 2000
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": { "__rl": true, "value": "REPLACE_WITH_POLLOLOKO_SHEET_ID", "mode": "id" },
+        "sheetName": { "__rl": true, "value": "gid=0", "mode": "list", "cachedResultName": "Pedidos" },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "ID Pedido": "={{ 'PED-' + $now.toFormat('yyyyMMdd-HHmmss') }}",
+            "Data": "={{ $now.setZone('America/Sao_Paulo').toFormat('dd/MM/yyyy') }}",
+            "Hora": "={{ $now.setZone('America/Sao_Paulo').toFormat('HH:mm') }}",
+            "Canal": "WhatsApp",
+            "Cliente": "={{ $json.output?.cliente_nome || $('Dados').item.json['push name'] }}",
+            "WhatsApp": "={{ $('Dados').item.json['chat ID'].replace('@c.us','').replace('@lid','') }}",
+            "Bairro": "={{ $json.output?.bairro || '' }}",
+            "Itens": "={{ JSON.stringify($json.output?.itens_carrinho || []) }}",
+            "Total": "={{ $json.output?.total || 0 }}",
+            "Pagamento": "={{ $json.output?.pagamento || '' }}",
+            "Modo": "={{ $json.output?.modo || '' }}",
+            "Status": "={{ $json.output?.status === 'pedido_criado' ? 'Em preparo' : 'Em atendimento' }}",
+            "Chat ID": "={{ $('Dados').item.json['chat ID'] }}",
+            "NPS": "={{ $json.output?.nps_resposta || '' }}"
+          },
+          "matchingColumns": ["Chat ID"],
+          "schema": [
+            { "id": "ID Pedido", "displayName": "ID Pedido", "required": false, "defaultMatch": false, "display": true, "canBeUsedToMatch": true, "type": "string" },
+            { "id": "Data", "displayName": "Data", "required": false, "defaultMatch": false, "display": true, "canBeUsedToMatch": true, "type": "string" },
+            { "id": "Hora", "displayName": "Hora", "required": false, "defaultMatch": false, "display": true, "canBeUsedToMatch": true, "type": "string" },
+            { "id": "Canal", "displayName": "Canal", "required": false, "defaultMatch": false, "display": true, "canBeUsedToMatch": true, "type": "string" },
+            { "id": "Cliente", "displayName": "Cliente", "required": false, "defaultMatch": false, "display": true, "canBeUsedToMatch": true, "type": "string" },
+            { "id": "WhatsApp", "displayName": "WhatsApp", "required": false, "defaultMatch": false, "display": true, "canBeUsedToMatch": true, "type": "string" },
+            { "id": "Bairro", "displayName": "Bairro", "required": false, "defaultMatch": false, "display": true, "canBeUsedToMatch": true, "type": "string" },
+            { "id": "Itens", "displayName": "Itens", "required": false, "defaultMatch": false, "display": true, "canBeUsedToMatch": true, "type": "string" },
+            { "id": "Total", "displayName": "Total", "required": false, "defaultMatch": false, "display": true, "canBeUsedToMatch": true, "type": "string" },
+            { "id": "Pagamento", "displayName": "Pagamento", "required": false, "defaultMatch": false, "display": true, "canBeUsedToMatch": true, "type": "string" },
+            { "id": "Modo", "displayName": "Modo", "required": false, "defaultMatch": false, "display": true, "canBeUsedToMatch": true, "type": "string" },
+            { "id": "Status", "displayName": "Status", "required": false, "defaultMatch": false, "display": true, "canBeUsedToMatch": true, "type": "string" },
+            { "id": "Chat ID", "displayName": "Chat ID", "required": true, "defaultMatch": true, "display": true, "canBeUsedToMatch": true, "type": "string" },
+            { "id": "NPS", "displayName": "NPS", "required": false, "defaultMatch": false, "display": true, "canBeUsedToMatch": true, "type": "string" }
+          ]
+        },
+        "options": {}
+      },
+      "id": "sheets-001",
+      "name": "Salvar Pedido",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.5,
+      "position": [1700, 380],
+      "credentials": {
+        "googleSheetsOAuth2Api": { "id": "REUSE_FROM_BEATRIZ", "name": "Google Sheets account" }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "read",
+        "documentId": { "__rl": true, "value": "REPLACE_WITH_POLLOLOKO_SHEET_ID", "mode": "id" },
+        "sheetName": { "__rl": true, "value": "gid=CARDAPIO_GID", "mode": "list", "cachedResultName": "Cardapio" },
+        "options": {}
+      },
+      "id": "tool-cardapio-001",
+      "name": "ler_cardapio",
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.5,
+      "position": [1500, 380],
+      "credentials": {
+        "googleSheetsOAuth2Api": { "id": "REUSE_FROM_BEATRIZ", "name": "Google Sheets account" }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## 📋 Setup necessário antes de ativar\n\n**1. Credenciais — reuse do Beatriz:**\n- OpenAI (gpt-5-mini)\n- Postgres (Supabase para memória)\n- Redis (Upstash para buffer)\n- HTTP Header Auth (WAHA)\n- Google Sheets OAuth\n\nSubstitua `REUSE_FROM_BEATRIZ` em cada nó pelo ID real da credencial.\n\n**2. Google Sheets:**\nCrie planilha 'Pollo Loko Praça 8 - DB' com 4 abas: Cardapio, Pedidos, Clientes, Fidelidade. Importe os 4 CSVs entregues.\n\nCole o documentId em **2 lugares:** nó 'Salvar Pedido' e nó 'ler_cardapio'.\n\n**3. WAHA webhook:**\nNo dashboard WAHA, configure webhook para `https://erickalmeida.app.n8n.cloud/webhook/polloloko-praca8`.\n\n**4. Tabela Postgres:**\nCrie tabela `polly_chat_memory` no Supabase (mesma estrutura do beatriz_chat_memory).\n\n**5. Ativar:**\nClick Activate (canto superior direito) e teste mandando 'oi' pro WhatsApp.",
+        "height": 380,
+        "width": 380,
+        "color": 4
+      },
+      "id": "note-001",
+      "name": "Setup Polly",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [-400, -250]
+    }
+  ],
+  "connections": {
+    "Webhook WAHA": { "main": [[{ "node": "Dados", "type": "main", "index": 0 }]] },
+    "Dados": { "main": [[{ "node": "push buffer", "type": "main", "index": 0 }]] },
+    "push buffer": { "main": [[{ "node": "Wait 5s", "type": "main", "index": 0 }]] },
+    "Wait 5s": { "main": [[{ "node": "get msgs", "type": "main", "index": 0 }]] },
+    "get msgs": { "main": [[{ "node": "filterBuffer", "type": "main", "index": 0 }]] },
+    "filterBuffer": { "main": [[{ "node": "deleteBuffer", "type": "main", "index": 0 }]] },
+    "deleteBuffer": { "main": [[{ "node": "junta_msgs", "type": "main", "index": 0 }]] },
+    "junta_msgs": { "main": [[{ "node": "AI Agent Polly", "type": "main", "index": 0 }]] },
+    "AI Agent Polly": { "main": [[{ "node": "WAHA Send Text", "type": "main", "index": 0 }]] },
+    "WAHA Send Text": { "main": [[{ "node": "Salvar Pedido", "type": "main", "index": 0 }]] },
+    "OpenAI": { "ai_languageModel": [[{ "node": "AI Agent Polly", "type": "ai_languageModel", "index": 0 }]] },
+    "Postgres Memory": { "ai_memory": [[{ "node": "AI Agent Polly", "type": "ai_memory", "index": 0 }]] },
+    "Structured Output Parser": { "ai_outputParser": [[{ "node": "AI Agent Polly", "type": "ai_outputParser", "index": 0 }]] },
+    "ler_cardapio": { "ai_tool": [[{ "node": "AI Agent Polly", "type": "ai_tool", "index": 0 }]] }
+  },
+  "settings": { "executionOrder": "v1", "timezone": "America/Sao_Paulo" }
+}

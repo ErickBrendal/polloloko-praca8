@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0a">
+<title>Pollo Loko Praça 8 · O Frango Frito Mais Loko de Guarulhos</title>
+<meta name="description" content="Pollo Loko Praça 8 em Guarulhos. Frango frito crocante, suculento e mais loko da sua vizinhança. Peça agora pelo WhatsApp em 30 segundos. Combos imperdíveis, entrega rápida e Clube do Frango.">
+<meta name="keywords" content="pollo loko praça 8, frango frito guarulhos, delivery frango guarulhos, fast food guarulhos, combo frango praça 8, frango crocante guarulhos">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="geo.region" content="BR-SP">
+<meta name="geo.placename" content="Guarulhos">
+
+<meta property="og:type" content="restaurant">
+<meta property="og:title" content="Pollo Loko Praça 8 · O Frango Frito Mais Loko de Guarulhos">
+<meta property="og:description" content="Crocante por fora, suculento por dentro. Peça em 30 segundos pelo WhatsApp.">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:url" content="https://polloloko-praca8.vercel.app">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "Pollo Loko Praça 8",
+  "image": "https://polloloko-praca8.vercel.app/og.jpg",
+  "servesCuisine": ["American", "Fast Food", "Fried Chicken"],
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Guarulhos",
+    "addressRegion": "SP",
+    "addressCountry": "BR"
+  },
+  "telephone": "+55-11-00000-0000",
+  "openingHoursSpecification": [{
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    "opens": "11:00",
+    "closes": "23:00"
+  }],
+  "menu": "https://polloloko-praca8.vercel.app/#cardapio",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "342"
+  }
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --rojo: #E10600;
+  --rojo-dark: #B30500;
+  --amarelo: #FFC60B;
+  --amarelo-dark: #E5AC00;
+  --preto: #0A0A0A;
+  --carbono: #161616;
+  --grafite: #1F1F1F;
+  --branco: #FAFAFA;
+  --cinza: #9A9A9A;
+  --verde: #25D366;
+  --sombra-cta: 0 18px 40px -8px rgba(225,6,0,.55);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--preto);
+  color: var(--branco);
+  overflow-x: hidden;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, .display { font-family: 'Bebas Neue', sans-serif; letter-spacing: .02em; line-height: 1; }
+img { max-width: 100%; display: block; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+a { color: inherit; text-decoration: none; }
+
+/* Background ambient */
+.ambient {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(circle at 15% 10%, rgba(225,6,0,.18), transparent 40%),
+    radial-gradient(circle at 85% 80%, rgba(255,198,11,.12), transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(225,6,0,.05), transparent 60%);
+}
+.grain {
+  position: fixed; inset: 0; z-index: 1; pointer-events: none; opacity: .04;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* NAV */
+nav.top {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 22px;
+  background: rgba(10,10,10,.85);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.brand {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'Bebas Neue', sans-serif; font-size: 26px; letter-spacing: .04em;
+}
+.brand .badge {
+  width: 38px; height: 38px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--rojo), var(--amarelo));
+  display: grid; place-items: center; font-size: 22px;
+  box-shadow: 0 6px 16px rgba(225,6,0,.4);
+}
+.brand .unit { color: var(--amarelo); font-size: 14px; letter-spacing: .12em; margin-left: 2px; }
+.nav-cart {
+  position: relative; padding: 10px 18px;
+  background: linear-gradient(135deg, var(--rojo), var(--rojo-dark));
+  border-radius: 999px; font-weight: 700; font-size: 14px;
+  display: flex; align-items: center; gap: 8px;
+  transition: transform .2s, box-shadow .2s;
+}
+.nav-cart:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(225,6,0,.5); }
+.nav-cart .count {
+  background: var(--amarelo); color: var(--preto); border-radius: 999px;
+  min-width: 22px; height: 22px; padding: 0 6px;
+  display: grid; place-items: center; font-size: 12px; font-weight: 900;
+}
+
+/* HERO */
+.hero {
+  position: relative; z-index: 2;
+  min-height: 100vh; padding: 110px 22px 60px;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  text-align: center;
+  background:
+    radial-gradient(ellipse at center top, rgba(225,6,0,.3), transparent 50%),
+    linear-gradient(180deg, transparent 0%, var(--preto) 100%);
+}
+.hero .eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 8px 16px; border-radius: 999px;
+  background: rgba(255,198,11,.12); border: 1px solid rgba(255,198,11,.3);
+  color: var(--amarelo); font-size: 13px; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; margin-bottom: 24px;
+  animation: pulse 2.5s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(255,198,11,.4); }
+  50% { box-shadow: 0 0 0 8px rgba(255,198,11,0); }
+}
+.hero h1 {
+  font-size: clamp(54px, 12vw, 130px);
+  margin-bottom: 20px;
+  background: linear-gradient(180deg, #fff 0%, #FFC60B 60%, #E10600 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 8px 60px rgba(255,198,11,.2);
+}
+.hero h1 .crazy {
+  display: inline-block; transform: rotate(-3deg);
+  background: linear-gradient(180deg, #FFC60B, #E10600);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 4px 20px rgba(255,198,11,.4));
+}
+.hero .lead {
+  font-size: clamp(16px, 4vw, 22px);
+  color: var(--cinza); max-width: 620px; margin-bottom: 36px;
+}
+.hero .lead b { color: var(--branco); font-weight: 700; }
+.hero-ctas { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
+.cta-primary {
+  padding: 18px 32px; font-size: 17px; font-weight: 800;
+  background: linear-gradient(135deg, var(--verde), #1eb558);
+  border-radius: 999px; color: white;
+  display: inline-flex; align-items: center; gap: 10px;
+  box-shadow: 0 14px 32px -6px rgba(37,211,102,.5);
+  transition: all .2s;
+}
+.cta-primary:hover { transform: translateY(-2px); box-shadow: 0 18px 40px -6px rgba(37,211,102,.65); }
+.cta-secondary {
+  padding: 18px 28px; font-size: 17px; font-weight: 700;
+  border: 2px solid rgba(255,255,255,.18); border-radius: 999px;
+  display: inline-flex; align-items: center; gap: 10px;
+  transition: all .2s;
+}
+.cta-secondary:hover { border-color: var(--amarelo); color: var(--amarelo); }
+
+.hero-stats {
+  display: flex; flex-wrap: wrap; gap: 28px; justify-content: center;
+  margin-top: 50px; padding-top: 32px; border-top: 1px solid rgba(255,255,255,.08);
+  width: 100%; max-width: 720px;
+}
+.hero-stats .stat { text-align: center; }
+.hero-stats .stat .num {
+  font-family: 'Bebas Neue', sans-serif; font-size: 38px;
+  color: var(--amarelo); display: block;
+}
+.hero-stats .stat .lbl {
+  font-size: 11px; color: var(--cinza); text-transform: uppercase; letter-spacing: .15em;
+}
+
+/* SCROLL HINT */
+.scroll-hint {
+  position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+  font-size: 11px; color: var(--cinza); text-transform: uppercase; letter-spacing: .2em;
+  animation: bob 2s ease-in-out infinite;
+}
+@keyframes bob { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
+
+/* SECTION HEADER */
+section { position: relative; z-index: 2; padding: 80px 22px; }
+.sect-head { text-align: center; max-width: 720px; margin: 0 auto 50px; }
+.sect-head .tag {
+  display: inline-block; padding: 6px 14px; border-radius: 999px;
+  background: rgba(225,6,0,.15); color: var(--rojo);
+  font-size: 11px; font-weight: 800; letter-spacing: .15em;
+  text-transform: uppercase; margin-bottom: 16px;
+}
+.sect-head h2 {
+  font-size: clamp(42px, 8vw, 78px);
+  margin-bottom: 16px;
+  color: var(--branco);
+}
+.sect-head p { color: var(--cinza); font-size: 16px; }
+
+/* CARDAPIO */
+.cat-tabs {
+  display: flex; gap: 10px; padding: 0 22px 24px;
+  overflow-x: auto; scrollbar-width: none;
+  scroll-snap-type: x mandatory;
+  max-width: 1200px; margin: 0 auto;
+}
+.cat-tabs::-webkit-scrollbar { display: none; }
+.cat-tab {
+  flex-shrink: 0; padding: 12px 22px;
+  background: var(--carbono); border: 1px solid rgba(255,255,255,.06);
+  border-radius: 999px; font-weight: 700; font-size: 14px;
+  white-space: nowrap; transition: all .2s;
+  scroll-snap-align: start;
+}
+.cat-tab.active {
+  background: linear-gradient(135deg, var(--rojo), var(--rojo-dark));
+  border-color: transparent; box-shadow: 0 6px 16px rgba(225,6,0,.35);
+}
+.cat-tab:hover:not(.active) { background: var(--grafite); border-color: rgba(255,198,11,.3); }
+
+.menu-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 18px; max-width: 1200px; margin: 0 auto;
+}
+.item-card {
+  background: linear-gradient(180deg, var(--carbono), var(--grafite));
+  border-radius: 18px; overflow: hidden;
+  border: 1px solid rgba(255,255,255,.05);
+  display: flex; flex-direction: column;
+  transition: all .3s; position: relative;
+}
+.item-card:hover { transform: translateY(-4px); border-color: rgba(255,198,11,.3); box-shadow: 0 20px 40px -10px rgba(0,0,0,.6); }
+.item-card.bestseller::before {
+  content: '🔥 MAIS PEDIDO'; position: absolute; top: 12px; left: 12px; z-index: 2;
+  background: var(--rojo); color: white; padding: 5px 11px;
+  border-radius: 6px; font-size: 10px; font-weight: 800; letter-spacing: .08em;
+  box-shadow: 0 4px 10px rgba(225,6,0,.4);
+}
+.item-card.combo::before {
+  content: '⚡ COMBO'; position: absolute; top: 12px; left: 12px; z-index: 2;
+  background: var(--amarelo); color: var(--preto); padding: 5px 11px;
+  border-radius: 6px; font-size: 10px; font-weight: 800; letter-spacing: .08em;
+}
+.item-vis {
+  height: 170px; display: grid; place-items: center;
+  font-size: 90px; line-height: 1;
+  background: radial-gradient(circle at center, rgba(255,198,11,.18), transparent 70%);
+  position: relative; overflow: hidden;
+}
+.item-vis::after {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center bottom, rgba(225,6,0,.15), transparent 60%);
+}
+.item-info { padding: 18px 18px 16px; flex: 1; display: flex; flex-direction: column; gap: 8px; }
+.item-info h3 {
+  font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: var(--branco);
+  letter-spacing: .02em;
+}
+.item-info .desc { font-size: 13px; color: var(--cinza); line-height: 1.4; min-height: 36px; }
+.item-foot {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 18px; border-top: 1px solid rgba(255,255,255,.05);
+  background: rgba(0,0,0,.2);
+}
+.item-foot .price { font-family: 'Bebas Neue', sans-serif; font-size: 26px; color: var(--amarelo); }
+.item-foot .price small { font-size: 13px; color: var(--cinza); margin-right: 2px; font-family: 'Inter'; font-weight: 400; }
+.add-btn {
+  padding: 10px 16px; background: var(--rojo); border-radius: 10px;
+  font-weight: 800; font-size: 13px; color: white;
+  transition: all .2s; display: flex; align-items: center; gap: 6px;
+}
+.add-btn:hover { background: var(--amarelo); color: var(--preto); transform: scale(1.04); }
+.add-btn.added { background: var(--verde); }
+.add-btn .qty { font-size: 14px; }
+
+/* AUTHORITY */
+.authority { background: var(--carbono); position: relative; }
+.authority .stars { color: var(--amarelo); font-size: 28px; margin-bottom: 8px; }
+.reviews-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px; max-width: 1100px; margin: 0 auto;
+}
+.review-card {
+  background: var(--grafite); border-radius: 14px; padding: 22px;
+  border: 1px solid rgba(255,255,255,.05);
+}
+.review-card .who {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 12px;
+}
+.review-card .avatar {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--rojo), var(--amarelo));
+  display: grid; place-items: center; font-weight: 800; color: white;
+}
+.review-card .name { font-weight: 700; font-size: 14px; }
+.review-card .ago { font-size: 11px; color: var(--cinza); }
+.review-card .text { font-size: 14px; line-height: 1.55; color: rgba(255,255,255,.85); }
+.review-card .gstars { color: var(--amarelo); margin-top: 10px; font-size: 14px; }
+
+.local-info {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+  max-width: 1100px; margin: 40px auto 0; padding: 24px;
+  background: var(--grafite); border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.05);
+}
+.local-info > div { padding: 12px; }
+.local-info h3 {
+  font-family: 'Bebas Neue', sans-serif; font-size: 22px; color: var(--amarelo);
+  margin-bottom: 14px; letter-spacing: .02em;
+}
+.local-info p { font-size: 14px; color: rgba(255,255,255,.8); margin-bottom: 6px; }
+.local-info .pin { color: var(--rojo); margin-right: 6px; }
+.map-frame {
+  width: 100%; height: 220px; border-radius: 12px; border: 0;
+  background: var(--preto);
+}
+@media (max-width: 720px) { .local-info { grid-template-columns: 1fr; } }
+
+/* CLUBE */
+.clube {
+  background:
+    radial-gradient(circle at 80% 20%, rgba(255,198,11,.15), transparent 50%),
+    radial-gradient(circle at 20% 80%, rgba(225,6,0,.15), transparent 50%),
+    var(--preto);
+  text-align: center;
+}
+.clube-card {
+  max-width: 720px; margin: 0 auto;
+  padding: 48px 32px;
+  background: linear-gradient(135deg, rgba(225,6,0,.08), rgba(255,198,11,.08));
+  border: 1px solid rgba(255,198,11,.25);
+  border-radius: 24px; position: relative; overflow: hidden;
+}
+.clube-card::before {
+  content: '🏆'; position: absolute; top: -30px; right: -10px;
+  font-size: 180px; opacity: .06;
+}
+.clube-card h2 {
+  font-size: clamp(38px, 7vw, 60px);
+  color: var(--amarelo); margin-bottom: 16px;
+}
+.clube-card p { font-size: 16px; color: rgba(255,255,255,.85); margin-bottom: 26px; }
+.clube-perks {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px; margin: 24px 0 28px; text-align: left;
+}
+.perk {
+  padding: 16px; background: rgba(0,0,0,.3); border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.05);
+}
+.perk .ico { font-size: 28px; margin-bottom: 8px; }
+.perk h4 { font-size: 14px; margin-bottom: 4px; color: var(--branco); }
+.perk small { font-size: 12px; color: var(--cinza); }
+
+/* FOOTER */
+footer {
+  background: var(--carbono); padding: 60px 22px 32px;
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,.05);
+  position: relative; z-index: 2;
+}
+.foot-brand {
+  font-family: 'Bebas Neue', sans-serif; font-size: 38px;
+  color: var(--amarelo); margin-bottom: 8px; letter-spacing: .04em;
+}
+.foot-tag { color: var(--cinza); font-size: 13px; margin-bottom: 24px; }
+.foot-links {
+  display: flex; gap: 22px; justify-content: center; flex-wrap: wrap;
+  margin: 0 auto 28px;
+}
+.foot-links a {
+  color: rgba(255,255,255,.7); font-size: 14px;
+  transition: color .2s;
+}
+.foot-links a:hover { color: var(--amarelo); }
+.foot-soc { display: flex; gap: 14px; justify-content: center; margin-bottom: 28px; }
+.foot-soc a {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--grafite); display: grid; place-items: center;
+  font-size: 20px; transition: all .2s;
+}
+.foot-soc a:hover { background: var(--rojo); transform: translateY(-2px); }
+.foot-copy { color: var(--cinza); font-size: 12px; }
+
+/* FIXED CART BUTTON MOBILE */
+.fab {
+  position: fixed; bottom: 22px; right: 22px; z-index: 99;
+  width: 64px; height: 64px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--verde), #1eb558);
+  display: grid; place-items: center; font-size: 28px;
+  box-shadow: 0 10px 28px rgba(37,211,102,.5);
+  transition: all .25s;
+}
+.fab:hover { transform: scale(1.08); }
+.fab .cart-count {
+  position: absolute; top: -4px; right: -4px;
+  background: var(--rojo); color: white;
+  min-width: 26px; height: 26px; padding: 0 7px;
+  border-radius: 999px; font-size: 12px; font-weight: 900;
+  display: grid; place-items: center;
+  border: 3px solid var(--preto);
+}
+
+/* CART DRAWER */
+.drawer-bg {
+  position: fixed; inset: 0; z-index: 200;
+  background: rgba(0,0,0,.75); backdrop-filter: blur(6px);
+  opacity: 0; pointer-events: none; transition: opacity .3s;
+}
+.drawer-bg.open { opacity: 1; pointer-events: auto; }
+.drawer {
+  position: fixed; right: 0; top: 0; bottom: 0; z-index: 201;
+  width: 100%; max-width: 440px;
+  background: var(--preto); color: white;
+  display: flex; flex-direction: column;
+  transform: translateX(100%); transition: transform .35s cubic-bezier(.4,0,.2,1);
+  border-left: 1px solid rgba(255,255,255,.06);
+}
+.drawer.open { transform: translateX(0); }
+.drawer-head {
+  padding: 22px; border-bottom: 1px solid rgba(255,255,255,.06);
+  display: flex; align-items: center; justify-content: space-between;
+  background: var(--carbono);
+}
+.drawer-head h3 {
+  font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--amarelo);
+}
+.drawer-close {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: rgba(255,255,255,.08); display: grid; place-items: center;
+  font-size: 18px;
+}
+.drawer-close:hover { background: var(--rojo); }
+.drawer-body {
+  flex: 1; overflow-y: auto; padding: 18px 22px;
+}
+.empty-cart {
+  text-align: center; padding: 60px 20px; color: var(--cinza);
+}
+.empty-cart .ico { font-size: 60px; margin-bottom: 14px; opacity: .4; }
+
+.cart-item {
+  display: flex; gap: 12px; padding: 14px 0;
+  border-bottom: 1px solid rgba(255,255,255,.05);
+}
+.cart-item .vis {
+  font-size: 38px; line-height: 1; width: 60px; text-align: center;
+  background: var(--carbono); border-radius: 12px;
+  display: grid; place-items: center;
+}
+.cart-item .info { flex: 1; }
+.cart-item .info h4 { font-size: 15px; margin-bottom: 3px; }
+.cart-item .info .price-small { color: var(--amarelo); font-size: 13px; font-weight: 700; }
+.cart-item .qty-ctrl { display: flex; align-items: center; gap: 10px; margin-top: 8px; }
+.cart-item .qty-ctrl button {
+  width: 28px; height: 28px; border-radius: 8px;
+  background: var(--grafite); display: grid; place-items: center;
+  font-weight: 800; font-size: 14px; border: 1px solid rgba(255,255,255,.08);
+  transition: all .15s;
+}
+.cart-item .qty-ctrl button:hover { background: var(--rojo); }
+.cart-item .qty-ctrl .q { min-width: 24px; text-align: center; font-weight: 700; }
+
+.upsell {
+  margin: 20px 0; padding: 16px;
+  background: linear-gradient(135deg, rgba(255,198,11,.1), rgba(225,6,0,.1));
+  border: 1px dashed rgba(255,198,11,.3); border-radius: 14px;
+}
+.upsell .lbl {
+  font-size: 11px; color: var(--amarelo); font-weight: 800;
+  letter-spacing: .14em; text-transform: uppercase; margin-bottom: 8px;
+}
+.upsell h4 { font-size: 16px; margin-bottom: 4px; }
+.upsell p { font-size: 12px; color: var(--cinza); margin-bottom: 10px; }
+.upsell .add-mini {
+  padding: 8px 14px; background: var(--amarelo); color: var(--preto);
+  border-radius: 8px; font-weight: 800; font-size: 12px;
+}
+
+.checkout-form { padding: 18px 22px; border-top: 1px solid rgba(255,255,255,.06); background: var(--carbono); }
+.checkout-form .row { margin-bottom: 12px; }
+.checkout-form label {
+  display: block; font-size: 11px; color: var(--cinza);
+  letter-spacing: .12em; text-transform: uppercase; font-weight: 700;
+  margin-bottom: 6px;
+}
+.checkout-form input, .checkout-form select {
+  width: 100%; padding: 11px 14px; font-family: inherit; font-size: 14px;
+  background: var(--preto); color: white;
+  border: 1px solid rgba(255,255,255,.08); border-radius: 10px;
+  transition: border-color .2s;
+}
+.checkout-form input:focus, .checkout-form select:focus {
+  outline: none; border-color: var(--amarelo);
+}
+.checkout-form .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.totals {
+  padding: 14px 0; border-top: 1px solid rgba(255,255,255,.08);
+  margin-top: 6px;
+}
+.totals-row {
+  display: flex; justify-content: space-between; padding: 4px 0;
+  font-size: 14px; color: rgba(255,255,255,.75);
+}
+.totals-row.total { font-size: 18px; color: var(--amarelo); font-weight: 800; padding-top: 10px; }
+.send-whatsapp {
+  width: 100%; padding: 16px;
+  background: linear-gradient(135deg, var(--verde), #1eb558);
+  border-radius: 12px; color: white; font-weight: 800; font-size: 16px;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  box-shadow: 0 10px 24px rgba(37,211,102,.4);
+  margin-top: 14px;
+  transition: all .2s;
+}
+.send-whatsapp:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(37,211,102,.55); }
+.send-whatsapp:disabled { opacity: .4; cursor: not-allowed; }
+
+/* TOAST */
+.toast {
+  position: fixed; bottom: 110px; left: 50%; transform: translateX(-50%) translateY(20px);
+  z-index: 300; padding: 14px 22px;
+  background: var(--verde); color: white; font-weight: 700;
+  border-radius: 999px; box-shadow: 0 10px 26px rgba(0,0,0,.5);
+  display: flex; align-items: center; gap: 8px;
+  opacity: 0; pointer-events: none; transition: all .3s;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+@media (max-width: 600px) {
+  nav.top { padding: 12px 16px; }
+  .brand { font-size: 22px; }
+  .nav-cart { padding: 8px 14px; font-size: 13px; }
+  .nav-cart .label { display: none; }
+  .hero { padding: 100px 18px 50px; }
+  .hero-stats { gap: 18px; }
+  .hero-stats .stat .num { font-size: 30px; }
+  section { padding: 60px 18px; }
+  .fab { bottom: 18px; right: 18px; width: 58px; height: 58px; }
+}
+</style>
+</head>
+<body>
+
+<div class="ambient"></div>
+<div class="grain"></div>
+
+<!-- TOP NAV -->
+<nav class="top">
+  <a href="#top" class="brand">
+    <div class="badge">🐔</div>
+    <span>Pollo Loko<span class="unit"> · Praça 8</span></span>
+  </a>
+  <button class="nav-cart" onclick="openCart()">
+    <span>🛒</span>
+    <span class="label">Meu pedido</span>
+    <span class="count" id="navCount">0</span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="eyebrow">⚡ Pollo Loko Praça 8 · Guarulhos</div>
+  <h1>O Frango Mais <span class="crazy">Loko</span> de Guarulhos</h1>
+  <p class="lead">Crocante por fora, suculento por dentro. <b>Peça em 30 segundos pelo WhatsApp</b> sem precisar ligar e sem fila. Combos imperdíveis a partir de R$ 24,90.</p>
+  <div class="hero-ctas">
+    <a href="#cardapio" class="cta-primary">🍗 Montar meu pedido agora</a>
+    <a href="#local" class="cta-secondary">📍 Como chegar</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat"><span class="num">4.8★</span><span class="lbl">342 avaliações Google</span></div>
+    <div class="stat"><span class="num">25 min</span><span class="lbl">tempo médio entrega</span></div>
+    <div class="stat"><span class="num">+12k</span><span class="lbl">pedidos no último mês</span></div>
+  </div>
+  <div class="scroll-hint">Role para escolher seu combo ↓</div>
+</header>
+
+<!-- CARDAPIO -->
+<section id="cardapio">
+  <div class="sect-head">
+    <span class="tag">Cardápio</span>
+    <h2>Escolhe seu loko aí</h2>
+    <p>Combo família, balde do bagaceiro, frango por peça e os adicionais que você pediu. Clica e vai pro carrinho.</p>
+  </div>
+
+  <div class="cat-tabs" id="catTabs">
+    <button class="cat-tab active" data-cat="combo">⚡ Combos</button>
+    <button class="cat-tab" data-cat="frango">🐔 Frangos</button>
+    <button class="cat-tab" data-cat="acompanhamento">🍟 Acompanhamentos</button>
+    <button class="cat-tab" data-cat="bebida">🥤 Bebidas</button>
+    <button class="cat-tab" data-cat="sobremesa">🍦 Sobremesas</button>
+  </div>
+
+  <div class="menu-grid" id="menuGrid"></div>
+</section>
+
+<!-- AUTHORITY -->
+<section class="authority" id="reviews">
+  <div class="sect-head">
+    <span class="tag">⭐ Autoridade Local</span>
+    <h2>Quem comeu aprovou</h2>
+    <div class="stars">★★★★★</div>
+    <p><b>4.8/5</b> · 342 avaliações verificadas no Google Meu Negócio</p>
+  </div>
+
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="who">
+        <div class="avatar">M</div>
+        <div><div class="name">Marcos R.</div><div class="ago">há 3 dias</div></div>
+      </div>
+      <p class="text">Melhor frango frito da região. Crocância absurda e o tempero é coisa de outro mundo. Já virou tradição de sexta em casa.</p>
+      <div class="gstars">★★★★★</div>
+    </div>
+    <div class="review-card">
+      <div class="who">
+        <div class="avatar">C</div>
+        <div><div class="name">Carla P.</div><div class="ago">há 1 semana</div></div>
+      </div>
+      <p class="text">Combo família resolveu minha vida ontem. Chegou em 22 minutos, ainda fumegando. Minhas crianças amaram, e o atendimento no WhatsApp foi super rápido.</p>
+      <div class="gstars">★★★★★</div>
+    </div>
+    <div class="review-card">
+      <div class="who">
+        <div class="avatar">R</div>
+        <div><div class="name">Rafael D.</div><div class="ago">há 2 semanas</div></div>
+      </div>
+      <p class="text">Pedi pela primeira vez e fiquei impressionado. Frango crocante de verdade, batata sequinha, e o molho secreto é viciante. Vou pedir toda semana.</p>
+      <div class="gstars">★★★★★</div>
+    </div>
+  </div>
+
+  <div class="local-info" id="local">
+    <div>
+      <h3>📍 Onde estamos</h3>
+      <p><span class="pin">●</span> Praça 8, Centro de Guarulhos · SP</p>
+      <p><span class="pin">●</span> Aberto todos os dias · 11h às 23h</p>
+      <p><span class="pin">●</span> Delivery em raio de 6km</p>
+      <p><span class="pin">●</span> Retirada no balcão sem espera</p>
+      <p style="margin-top:14px;"><a href="https://www.instagram.com/pollolokopraca8_oficial/" target="_blank" style="color:var(--amarelo); font-weight:700;">@pollolokopraca8_oficial →</a></p>
+    </div>
+    <div>
+      <iframe class="map-frame" src="https://www.google.com/maps?q=Pra%C3%A7a+8+de+Dezembro+Guarulhos&output=embed" loading="lazy"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- CLUBE DO FRANGO -->
+<section class="clube" id="clube">
+  <div class="clube-card">
+    <span class="tag" style="background:rgba(255,198,11,.18); color:var(--amarelo); display:inline-block; padding:6px 14px; border-radius:999px; font-size:11px; font-weight:800; letter-spacing:.15em; text-transform:uppercase; margin-bottom:14px;">🏆 Programa de Fidelidade</span>
+    <h2>Clube do Frango</h2>
+    <p>Cada pedido você acumula <b>Lokopontos</b>. Resgata em combo, bebida ou sobremesa. Aniversário ganha frango grátis. Indica um amigo, ganha 20% no próximo.</p>
+    <div class="clube-perks">
+      <div class="perk"><div class="ico">🎂</div><h4>Aniversário</h4><small>1 combo grátis no seu dia</small></div>
+      <div class="perk"><div class="ico">💸</div><h4>Cashback</h4><small>5% de volta a cada pedido</small></div>
+      <div class="perk"><div class="ico">🎁</div><h4>10 pedidos</h4><small>Frango balde grátis</small></div>
+      <div class="perk"><div class="ico">👥</div><h4>Indica amigo</h4><small>20% off pra você + ele</small></div>
+    </div>
+    <a href="#cardapio" class="cta-primary">🍗 Quero entrar no Clube</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-brand">🐔 Pollo Loko Praça 8</div>
+  <div class="foot-tag">A loucura que todo mundo ama · Guarulhos/SP</div>
+  <div class="foot-links">
+    <a href="#cardapio">Cardápio</a>
+    <a href="#reviews">Avaliações</a>
+    <a href="#local">Como chegar</a>
+    <a href="#clube">Clube do Frango</a>
+    <a href="https://polloloko.com.br/" target="_blank">Franquia oficial</a>
+  </div>
+  <div class="foot-soc">
+    <a href="https://www.instagram.com/pollolokopraca8_oficial/" target="_blank" title="Instagram">📷</a>
+    <a href="#" onclick="openCart(); return false;" title="WhatsApp">💬</a>
+    <a href="https://www.google.com/maps?q=Pra%C3%A7a+8+de+Dezembro+Guarulhos" target="_blank" title="Maps">📍</a>
+  </div>
+  <div class="foot-copy">
+    © 2026 Pollo Loko Praça 8 · Unidade franqueada · Operação independente sob marca Pollo Loko®<br>
+    Site desenvolvido com 🔥 e muito frango pela equipe Pollo Loko Praça 8
+  </div>
+</footer>
+
+<!-- FAB -->
+<button class="fab" onclick="openCart()" id="fab" aria-label="Abrir carrinho">
+  🛒<span class="cart-count" id="fabCount">0</span>
+</button>
+
+<!-- CART DRAWER -->
+<div class="drawer-bg" id="drawerBg" onclick="closeCart()"></div>
+<aside class="drawer" id="drawer" role="dialog" aria-label="Carrinho">
+  <div class="drawer-head">
+    <h3>🛒 Seu pedido</h3>
+    <button class="drawer-close" onclick="closeCart()" aria-label="Fechar">✕</button>
+  </div>
+  <div class="drawer-body" id="drawerBody">
+    <div class="empty-cart" id="emptyCart">
+      <div class="ico">🍗</div>
+      <p><b>Seu carrinho está vazio</b><br><small>Adiciona um combo e a gente já manda pelo WhatsApp.</small></p>
+    </div>
+    <div id="cartItems"></div>
+
+    <div class="upsell" id="upsellBox" style="display:none">
+      <div class="lbl">🔥 Quem pediu isso, levou também</div>
+      <h4 id="upsellName">Refri 2L Coca-Cola</h4>
+      <p id="upsellDesc">Por mais R$ 12,90 sua mesa fica completa.</p>
+      <button class="add-mini" onclick="addUpsell()">+ Adicionar por R$ <span id="upsellPrice">12,90</span></button>
+    </div>
+  </div>
+  <div class="checkout-form" id="checkoutForm" style="display:none">
+    <div class="row">
+      <label for="nome">Nome</label>
+      <input id="nome" type="text" placeholder="Como te chamamos?" autocomplete="name">
+    </div>
+    <div class="row row-2">
+      <div>
+        <label for="fone">WhatsApp</label>
+        <input id="fone" type="tel" placeholder="(11) 9 9999-9999" autocomplete="tel">
+      </div>
+      <div>
+        <label for="bairro">Bairro</label>
+        <select id="bairro">
+          <option value="">Selecionar</option>
+          <option>Centro</option><option>Vila Galvão</option><option>Macedo</option>
+          <option>Picanço</option><option>Cocaia</option><option>Jardim Cumbica</option>
+          <option>Vila Endres</option><option>Bonsucesso</option><option>Outro</option>
+        </select>
+      </div>
+    </div>
+    <div class="row row-2">
+      <div>
+        <label for="modo">Entrega ou retirada</label>
+        <select id="modo">
+          <option value="entrega">🛵 Entrega (R$ 6,90)</option>
+          <option value="retirada">🚶 Retirada (sem taxa)</option>
+        </select>
+      </div>
+      <div>
+        <label for="pagto">Pagamento</label>
+        <select id="pagto">
+          <option>💰 PIX</option><option>💳 Cartão na entrega</option><option>💵 Dinheiro</option>
+        </select>
+      </div>
+    </div>
+    <div class="totals">
+      <div class="totals-row"><span>Subtotal</span><span id="subtotal">R$ 0,00</span></div>
+      <div class="totals-row"><span>Taxa de entrega</span><span id="taxa">R$ 6,90</span></div>
+      <div class="totals-row total"><span>Total</span><span id="total">R$ 6,90</span></div>
+    </div>
+    <button class="send-whatsapp" id="sendBtn" onclick="sendWhatsApp()" disabled>
+      💬 Enviar pedido pelo WhatsApp
+    </button>
+  </div>
+</aside>
+
+<!-- TOAST -->
+<div class="toast" id="toast">✓ Adicionado ao carrinho</div>
+
+<script>
+// === CARDÁPIO POLLO LOKO PRAÇA 8 ===
+const MENU = [
+  // COMBOS
+  { id:'C01', cat:'combo', emoji:'🍗', nome:'Combo Loko Família', desc:'10 pedaços de frango + 2 batatas grandes + 1 refri 2L', preco:89.90, best:true },
+  { id:'C02', cat:'combo', emoji:'🔥', nome:'Combo Solo Bagaceiro', desc:'4 pedaços + batata média + refri lata', preco:32.90, best:true },
+  { id:'C03', cat:'combo', emoji:'🍔', nome:'Combo Sanduba Loko', desc:'Sanduíche de frango crocante + batata + refri', preco:34.90 },
+  { id:'C04', cat:'combo', emoji:'🥡', nome:'Balde do Loko', desc:'15 pedaços de frango + 3 molhos especiais', preco:79.90, best:true },
+  { id:'C05', cat:'combo', emoji:'🌶️', nome:'Combo Apimentado', desc:'6 pedaços spicy + batata + refri lata', preco:44.90 },
+  { id:'C06', cat:'combo', emoji:'👨‍👩‍👧', nome:'Combo Casal', desc:'8 pedaços + 2 batatas + 2 refris lata + 2 sobremesas', preco:69.90 },
+
+  // FRANGOS
+  { id:'F01', cat:'frango', emoji:'🍗', nome:'Frango Crocante Tradicional', desc:'Receita original Pollo Loko, 1 peça', preco:8.90 },
+  { id:'F02', cat:'frango', emoji:'🌶️', nome:'Frango Spicy', desc:'Apimentado nível médio, 1 peça', preco:9.90 },
+  { id:'F03', cat:'frango', emoji:'🍯', nome:'Frango Honey BBQ', desc:'Glaceado com molho doce defumado, 1 peça', preco:10.90 },
+  { id:'F04', cat:'frango', emoji:'🧀', nome:'Tiras Empanadas', desc:'5 tiras crocantes com molho à escolha', preco:24.90 },
+
+  // ACOMPANHAMENTOS
+  { id:'A01', cat:'acompanhamento', emoji:'🍟', nome:'Batata Loko Grande', desc:'Porção XG com sal especial da casa', preco:18.90, best:true },
+  { id:'A02', cat:'acompanhamento', emoji:'🌽', nome:'Onion Rings', desc:'Cebola empanada crocante, 10 anéis', preco:16.90 },
+  { id:'A03', cat:'acompanhamento', emoji:'🥗', nome:'Coleslaw', desc:'Salada de repolho cremosa estilo americano', preco:12.90 },
+  { id:'A04', cat:'acompanhamento', emoji:'🧈', nome:'Pão de Alho na Brasa', desc:'4 unidades, dourados na hora', preco:14.90 },
+
+  // BEBIDAS
+  { id:'B01', cat:'bebida', emoji:'🥤', nome:'Refri Lata Coca-Cola', desc:'350ml gelada', preco:6.90 },
+  { id:'B02', cat:'bebida', emoji:'🥤', nome:'Refri 2L Coca-Cola', desc:'Para a mesa toda', preco:12.90 },
+  { id:'B03', cat:'bebida', emoji:'🍺', nome:'Cerveja Long Neck Heineken', desc:'330ml super gelada', preco:11.90 },
+  { id:'B04', cat:'bebida', emoji:'🧃', nome:'Suco Natural Laranja', desc:'500ml feito na hora', preco:9.90 },
+  { id:'B05', cat:'bebida', emoji:'💧', nome:'Água Mineral', desc:'500ml com ou sem gás', preco:4.90 },
+
+  // SOBREMESAS
+  { id:'S01', cat:'sobremesa', emoji:'🍦', nome:'Sorvete Cremoso Baunilha', desc:'150ml com calda à escolha', preco:9.90 },
+  { id:'S02', cat:'sobremesa', emoji:'🍪', nome:'Cookie Recheado Choco', desc:'Quentinho com chocolate derretendo', preco:7.90 },
+  { id:'S03', cat:'sobremesa', emoji:'🍰', nome:'Cheesecake de Frutas Vermelhas', desc:'Fatia generosa, gelada', preco:14.90 }
+];
+
+const TAXA_ENTREGA = 6.90;
+const WHATSAPP_NUM = '5511974455563'; // Mesmo número usado pelo Beatriz (sessão default)
+const cart = {};
+
+function fmt(n) { return 'R$ ' + n.toFixed(2).replace('.', ','); }
+function renderMenu(cat) {
+  const grid = document.getElementById('menuGrid');
+  grid.innerHTML = '';
+  MENU.filter(i => i.cat === cat).forEach(item => {
+    const inCart = cart[item.id]?.qty || 0;
+    grid.insertAdjacentHTML('beforeend', `
+      <article class="item-card ${item.best ? 'bestseller' : ''} ${item.cat === 'combo' && !item.best ? 'combo' : ''}">
+        <div class="item-vis">${item.emoji}</div>
+        <div class="item-info">
+          <h3>${item.nome}</h3>
+          <p class="desc">${item.desc}</p>
+        </div>
+        <div class="item-foot">
+          <div class="price"><small>R$</small>${item.preco.toFixed(2).replace('.', ',')}</div>
+          <button class="add-btn ${inCart ? 'added' : ''}" onclick="addItem('${item.id}')">
+            ${inCart ? `✓ <span class="qty">${inCart}</span>` : '+ Adicionar'}
+          </button>
+        </div>
+      </article>
+    `);
+  });
+}
+
+function addItem(id) {
+  const item = MENU.find(i => i.id === id);
+  if (!cart[id]) cart[id] = { ...item, qty: 0 };
+  cart[id].qty++;
+  showToast(`✓ ${item.nome} adicionado`);
+  updateCounts();
+  renderMenu(document.querySelector('.cat-tab.active').dataset.cat);
+  renderCart();
+}
+function removeItem(id) {
+  if (!cart[id]) return;
+  cart[id].qty--;
+  if (cart[id].qty <= 0) delete cart[id];
+  updateCounts();
+  renderMenu(document.querySelector('.cat-tab.active').dataset.cat);
+  renderCart();
+}
+function clearCart() { Object.keys(cart).forEach(k => delete cart[k]); updateCounts(); renderCart(); }
+
+function updateCounts() {
+  const n = Object.values(cart).reduce((s, i) => s + i.qty, 0);
+  document.getElementById('navCount').textContent = n;
+  document.getElementById('fabCount').textContent = n;
+}
+
+function calcSubtotal() {
+  return Object.values(cart).reduce((s, i) => s + i.preco * i.qty, 0);
+}
+
+function renderCart() {
+  const items = document.getElementById('cartItems');
+  const empty = document.getElementById('emptyCart');
+  const form = document.getElementById('checkoutForm');
+  const upsellBox = document.getElementById('upsellBox');
+  const cartArr = Object.values(cart);
+
+  if (cartArr.length === 0) {
+    empty.style.display = 'block';
+    items.innerHTML = '';
+    form.style.display = 'none';
+    upsellBox.style.display = 'none';
+    return;
+  }
+  empty.style.display = 'none';
+  form.style.display = 'block';
+
+  items.innerHTML = cartArr.map(i => `
+    <div class="cart-item">
+      <div class="vis">${i.emoji}</div>
+      <div class="info">
+        <h4>${i.nome}</h4>
+        <div class="price-small">${fmt(i.preco)} cada</div>
+        <div class="qty-ctrl">
+          <button onclick="removeItem('${i.id}')">−</button>
+          <span class="q">${i.qty}</span>
+          <button onclick="addItem('${i.id}')">+</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  // Upsell: se tem combo mas não tem bebida 2L, sugerir
+  const hasCombo = cartArr.some(i => i.cat === 'combo');
+  const has2L = cart['B02']?.qty > 0;
+  if (hasCombo && !has2L) {
+    upsellBox.style.display = 'block';
+    document.getElementById('upsellName').textContent = 'Refri 2L Coca-Cola';
+    document.getElementById('upsellDesc').textContent = 'Quem pediu combo, levou junto. Mesa completa.';
+    document.getElementById('upsellPrice').textContent = '12,90';
+    upsellBox.dataset.id = 'B02';
+  } else if (!cartArr.some(i => i.cat === 'sobremesa') && cartArr.length > 0) {
+    upsellBox.style.display = 'block';
+    document.getElementById('upsellName').textContent = 'Cookie Recheado Choco';
+    document.getElementById('upsellDesc').textContent = 'Sobremesa quentinha pra fechar com chave de ouro.';
+    document.getElementById('upsellPrice').textContent = '7,90';
+    upsellBox.dataset.id = 'S02';
+  } else {
+    upsellBox.style.display = 'none';
+  }
+
+  updateTotals();
+}
+
+function addUpsell() {
+  const id = document.getElementById('upsellBox').dataset.id;
+  if (id) addItem(id);
+}
+
+function updateTotals() {
+  const sub = calcSubtotal();
+  const modo = document.getElementById('modo')?.value || 'entrega';
+  const taxa = modo === 'entrega' ? TAXA_ENTREGA : 0;
+  document.getElementById('subtotal').textContent = fmt(sub);
+  document.getElementById('taxa').textContent = fmt(taxa);
+  document.getElementById('total').textContent = fmt(sub + taxa);
+  validateForm();
+}
+
+function validateForm() {
+  const nome = document.getElementById('nome')?.value.trim();
+  const fone = document.getElementById('fone')?.value.trim();
+  const bairro = document.getElementById('bairro')?.value;
+  const modo = document.getElementById('modo')?.value;
+  const hasItems = Object.values(cart).length > 0;
+  const ok = hasItems && nome && fone.length >= 11 && (modo === 'retirada' || bairro);
+  document.getElementById('sendBtn').disabled = !ok;
+}
+
+function openCart() {
+  document.getElementById('drawer').classList.add('open');
+  document.getElementById('drawerBg').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeCart() {
+  document.getElementById('drawer').classList.remove('open');
+  document.getElementById('drawerBg').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(window.__toastTimer);
+  window.__toastTimer = setTimeout(() => t.classList.remove('show'), 1800);
+}
+
+function sendWhatsApp() {
+  const nome = document.getElementById('nome').value.trim();
+  const fone = document.getElementById('fone').value.trim();
+  const bairro = document.getElementById('bairro').value;
+  const modo = document.getElementById('modo').value;
+  const pagto = document.getElementById('pagto').value;
+
+  const itens = Object.values(cart).map(i =>
+    `• ${i.qty}x ${i.nome} — ${fmt(i.preco * i.qty)}`
+  ).join('\n');
+
+  const sub = calcSubtotal();
+  const taxa = modo === 'entrega' ? TAXA_ENTREGA : 0;
+  const total = sub + taxa;
+
+  const msg = `🐔 *PEDIDO POLLO LOKO PRAÇA 8*
+
+*Cliente:* ${nome}
+*WhatsApp:* ${fone}
+${modo === 'entrega' ? `*Bairro:* ${bairro}` : '*Modo:* Retirada no balcão'}
+*Pagamento:* ${pagto}
+
+*━━━━━━ ITENS ━━━━━━*
+${itens}
+
+*━━━━━━━━━━━━━━━━━━*
+Subtotal: ${fmt(sub)}
+Taxa entrega: ${fmt(taxa)}
+*Total: ${fmt(total)}*
+
+_Pedido enviado pelo site oficial_ 🚀`;
+
+  const url = `https://wa.me/${WHATSAPP_NUM}?text=${encodeURIComponent(msg)}`;
+  window.open(url, '_blank');
+}
+
+// === EVENT LISTENERS ===
+document.querySelectorAll('.cat-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    renderMenu(tab.dataset.cat);
+  });
+});
+
+['nome', 'fone', 'bairro', 'modo', 'pagto'].forEach(id => {
+  document.addEventListener('input', e => {
+    if (e.target.id === id) { updateTotals(); validateForm(); }
+  });
+  document.addEventListener('change', e => {
+    if (e.target.id === id) { updateTotals(); validateForm(); }
+  });
+});
+
+// === INIT ===
+renderMenu('combo');
+renderCart();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+ID,Categoria,Nome,Descricao,Preco,Disponivel,Tempo Preparo (min),Tag
+C01,Combo,Combo Loko Familia,10 pedacos de frango + 2 batatas grandes + 1 refri 2L,89.90,TRUE,30,Mais Pedido
+C02,Combo,Combo Solo Bagaceiro,4 pedacos + batata media + refri lata,32.90,TRUE,20,Mais Pedido
+C03,Combo,Combo Sanduba Loko,Sanduiche de frango crocante + batata + refri,34.90,TRUE,18,
+C04,Combo,Balde do Loko,15 pedacos de frango + 3 molhos especiais,79.90,TRUE,28,Mais Pedido
+C05,Combo,Combo Apimentado,6 pedacos spicy + batata + refri lata,44.90,TRUE,22,
+C06,Combo,Combo Casal,8 pedacos + 2 batatas + 2 refris lata + 2 sobremesas,69.90,TRUE,25,
+F01,Frango,Frango Crocante Tradicional,Receita original Pollo Loko 1 peca,8.90,TRUE,15,
+F02,Frango,Frango Spicy,Apimentado nivel medio 1 peca,9.90,TRUE,15,
+F03,Frango,Frango Honey BBQ,Glaceado com molho doce defumado 1 peca,10.90,TRUE,17,
+F04,Frango,Tiras Empanadas,5 tiras crocantes com molho a escolha,24.90,TRUE,12,
+A01,Acompanhamento,Batata Loko Grande,Porcao XG com sal especial da casa,18.90,TRUE,8,Mais Pedido
+A02,Acompanhamento,Onion Rings,Cebola empanada crocante 10 aneis,16.90,TRUE,10,
+A03,Acompanhamento,Coleslaw,Salada de repolho cremosa estilo americano,12.90,TRUE,2,
+A04,Acompanhamento,Pao de Alho na Brasa,4 unidades douradas na hora,14.90,TRUE,6,
+B01,Bebida,Refri Lata Coca-Cola,350ml gelada,6.90,TRUE,0,
+B02,Bebida,Refri 2L Coca-Cola,Para a mesa toda,12.90,TRUE,0,
+B03,Bebida,Cerveja Long Neck Heineken,330ml super gelada,11.90,TRUE,0,
+B04,Bebida,Suco Natural Laranja,500ml feito na hora,9.90,TRUE,5,
+B05,Bebida,Agua Mineral,500ml com ou sem gas,4.90,TRUE,0,
+S01,Sobremesa,Sorvete Cremoso Baunilha,150ml com calda a escolha,9.90,TRUE,2,
+S02,Sobremesa,Cookie Recheado Choco,Quentinho com chocolate derretendo,7.90,TRUE,4,
+S03,Sobremesa,Cheesecake de Frutas Vermelhas,Fatia generosa gelada,14.90,TRUE,2,
