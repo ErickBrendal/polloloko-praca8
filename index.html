@@ -225,6 +225,26 @@ footer{background:var(--c);padding:60px 22px 32px;text-align:center;border-top:1
 .bg{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.82);backdrop-filter:blur(8px);opacity:0;pointer-events:none;transition:opacity .3s}
 .bg.on{opacity:1;pointer-events:auto}
 .drw{position:fixed;right:0;top:0;bottom:0;z-index:201;width:100%;max-width:470px;background:var(--bg);color:#fff;display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1);border-left:1px solid rgba(255,255,255,.06)}
+@media(max-width:560px){.drw{max-width:100%;border-left:0}}
+.steps{display:flex;gap:6px;padding:14px 22px;background:var(--c);border-bottom:1px solid rgba(255,255,255,.05)}
+.step{flex:1;text-align:center;padding:8px 4px;font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.4);border-bottom:3px solid rgba(255,255,255,.08);transition:all .25s}
+.step.on{color:var(--y);border-color:var(--y)}
+.step.done{color:var(--green);border-color:var(--green)}
+.obs{margin-top:14px;padding:14px;background:rgba(255,198,11,.06);border:1px dashed rgba(255,198,11,.25);border-radius:10px}
+.obs label{font-size:11px;color:var(--y);letter-spacing:.1em;text-transform:uppercase;font-weight:800;margin-bottom:6px;display:block}
+.obs textarea{width:100%;min-height:60px;padding:10px 12px;font-family:inherit;font-size:13px;background:var(--bg);color:#fff;border:1px solid rgba(255,255,255,.1);border-radius:8px;resize:vertical}
+.obs textarea:focus{outline:0;border-color:var(--y)}
+.obs .hint{font-size:11px;color:rgba(255,255,255,.5);margin-top:6px}
+.review{padding:18px;background:var(--g);border-radius:14px;margin:14px 0;border:1px solid rgba(255,198,11,.3)}
+.review h4{font-family:'Anton',sans-serif;font-size:18px;color:var(--y);margin-bottom:12px;letter-spacing:.04em;text-transform:uppercase}
+.review .ri{padding:8px 0;border-bottom:1px dashed rgba(255,255,255,.07);font-size:13px;display:flex;justify-content:space-between;gap:10px}
+.review .ri:last-child{border:0}
+.review .ri .l{color:rgba(255,255,255,.6);font-weight:600}
+.review .ri .v{color:#fff;font-weight:700;text-align:right;max-width:60%;word-break:break-word}
+.actions{display:grid;grid-template-columns:1fr 2fr;gap:10px;margin-top:14px}
+.btn-back{padding:14px;background:transparent;border:1px solid rgba(255,255,255,.18);border-radius:10px;color:rgba(255,255,255,.8);font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.04em}
+.btn-back:hover{border-color:var(--r);color:var(--r)}
+.minbar{padding:10px 14px;background:rgba(234,29,44,.12);border:1px solid rgba(234,29,44,.3);border-radius:10px;font-size:12px;color:#FF8A8A;margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .drw.on{transform:translateX(0)}
 .dh{padding:22px;border-bottom:1px solid rgba(255,255,255,.07);display:flex;align-items:center;justify-content:space-between;background:var(--c)}
 .dh h3{font-family:'Anton',sans-serif;font-size:30px;color:var(--y);letter-spacing:.04em}
@@ -498,37 +518,60 @@ section{padding:60px 16px}
 <div class="bg" id="bg" onclick="cc()"></div>
 <aside class="drw" id="drw" role="dialog" aria-label="Carrinho">
   <div class="dh">
-    <h3>🛒 Seu pedido</h3>
+    <h3 id="dhTitle">🛒 Seu pedido</h3>
     <button class="dx" onclick="cc()" aria-label="Fechar">✕</button>
   </div>
+  <div class="steps" id="stepBar">
+    <div class="step on" data-s="1">1 · Itens</div>
+    <div class="step" data-s="2">2 · Seus dados</div>
+    <div class="step" data-s="3">3 · Confirmar</div>
+  </div>
   <div class="db" id="db">
-    <div class="empty" id="ec">
-      <span class="em">🍗</span>
-      <p><b>Carrinho vazio</b><br><small>Adiciona um combo e mando direto pelo WhatsApp.</small></p>
+    <!-- STEP 1: Itens -->
+    <div id="step1">
+      <div class="empty" id="ec">
+        <span class="em">🍗</span>
+        <p><b>Carrinho vazio</b><br><small>Adiciona um combo e a gente já estrutura tudo pro WhatsApp.</small></p>
+      </div>
+      <div id="ci"></div>
+      <div class="up" id="up" style="display:none">
+        <div class="lb">🔥 Quem pediu isso, levou também</div>
+        <h4 id="un"></h4>
+        <p id="ud"></p>
+        <button class="am" onclick="au()">+ Adicionar por R$ <span id="upr"></span></button>
+      </div>
+      <div class="obs" id="obsBox" style="display:none">
+        <label for="obs">📝 Observações do pedido (opcional)</label>
+        <textarea id="obs" placeholder="Ex: sem cebola na batata, 1 molho de pimenta extra, deixar na portaria..."></textarea>
+        <div class="hint">Quanto mais claro, menos pingue-pongue no WhatsApp 🙌</div>
+      </div>
     </div>
-    <div id="ci"></div>
-    <div class="up" id="up" style="display:none">
-      <div class="lb">🔥 Quem pediu isso, levou também</div>
-      <h4 id="un"></h4>
-      <p id="ud"></p>
-      <button class="am" onclick="au()">+ Adicionar por R$ <span id="upr"></span></button>
+    <!-- STEP 2: Dados -->
+    <div id="step2" style="display:none">
+      <div class="rw"><label for="nm">Seu nome</label><input id="nm" type="text" placeholder="Como te chamamos?" autocomplete="name"></div>
+      <div class="rw r2">
+        <div><label for="fn">WhatsApp</label><input id="fn" type="tel" placeholder="(11) 9 9999-9999" autocomplete="tel" inputmode="tel"></div>
+        <div><label for="md">Modo</label><select id="md"><option value="entrega">🛵 Entrega</option><option value="retirada">🚶 Retirada</option></select></div>
+      </div>
+      <div class="rw" id="br"><label for="bv">Endereço completo (rua, número, bairro, ponto de referência)</label><input id="bv" type="text" placeholder="Av. Vila Matias 100, Centro - próximo ao banco" autocomplete="street-address"></div>
+      <div class="rw"><label for="pg">Pagamento</label><select id="pg"><option>💰 PIX (chave: praca8@polloloko.com.br)</option><option>💳 Cartão na entrega</option><option>💵 Dinheiro (precisa troco?)</option></select></div>
+    </div>
+    <!-- STEP 3: Confirmar -->
+    <div id="step3" style="display:none">
+      <div class="review" id="revBox"></div>
     </div>
   </div>
-  <div class="cf" id="cf" style="display:none">
-    <div class="rw"><label for="nm">Seu nome</label><input id="nm" type="text" placeholder="Como te chamamos?" autocomplete="name"></div>
-    <div class="rw r2">
-      <div><label for="fn">WhatsApp</label><input id="fn" type="tel" placeholder="(11) 9 9999-9999" autocomplete="tel"></div>
-      <div><label for="md">Modo</label><select id="md"><option value="entrega">🛵 Entrega</option><option value="retirada">🚶 Retirada</option></select></div>
-    </div>
-    <div class="rw" id="br"><label for="bv">Endereço</label><input id="bv" type="text" placeholder="Rua, número, bairro"></div>
-    <div class="rw"><label for="pg">Pagamento</label><select id="pg"><option>💰 PIX (chave: praca8@polloloko.com.br)</option><option>💳 Cartão na entrega</option><option>💵 Dinheiro (precisa troco?)</option></select></div>
+  <!-- FOOTER FIXO -->
+  <div class="cf" id="cf">
+    <div class="minbar" id="minbar" style="display:none">⚠️ Pedido mínimo R$ 40,00 · faltam <b id="minDelta"></b></div>
     <div class="tt">
       <div class="rw"><span>Subtotal</span><span id="st">R$ 0,00</span></div>
       <div class="rw"><span>Taxa entrega</span><span id="tx">a combinar</span></div>
       <div class="rw tl"><span>Total</span><span id="tl">R$ 0,00</span></div>
     </div>
-    <button class="snd" id="sb" onclick="sw()" disabled>💬 Enviar pelo WhatsApp</button>
-    <div class="warn">Pedido mínimo: <b>R$ 40,00</b></div>
+    <div id="footActions">
+      <button class="snd" id="continueBtn" onclick="goStep(2)" disabled>Continuar → Seus dados</button>
+    </div>
   </div>
 </aside>
 
@@ -560,6 +603,7 @@ const M=[
 const WA='5511997100012';
 const C={};
 function fm(n){return 'R$ '+n.toFixed(2).replace('.',',')}
+let STEP=1;
 function rm(c){
   const g=document.getElementById('mg');
   g.innerHTML='';
@@ -613,15 +657,78 @@ function uc(){
   document.getElementById('fc').textContent=n;
 }
 function st(){return Object.values(C).reduce((s,x)=>s+x.p*x.q,0)}
+function showStep(n){
+  STEP=n;
+  ['step1','step2','step3'].forEach((id,i)=>{document.getElementById(id).style.display=(i+1===n)?'block':'none'});
+  document.querySelectorAll('.step').forEach((el,i)=>{
+    el.classList.remove('on','done');
+    if(i+1<n)el.classList.add('done');
+    else if(i+1===n)el.classList.add('on');
+  });
+  const titles=['🛒 Seu pedido','📝 Seus dados','✅ Confirme e envie'];
+  document.getElementById('dhTitle').textContent=titles[n-1];
+  const fa=document.getElementById('footActions');
+  if(n===1){fa.innerHTML='<button class="snd" id="continueBtn" onclick="goStep(2)" disabled>Continuar → Seus dados</button>';}
+  else if(n===2){fa.innerHTML='<div class="actions"><button class="btn-back" onclick="goStep(1)">← Voltar</button><button class="snd" id="continueBtn" style="margin:0" onclick="goStep(3)" disabled>Revisar pedido →</button></div>';}
+  else{fa.innerHTML='<div class="actions"><button class="btn-back" onclick="goStep(2)">← Editar</button><button class="snd" id="sb" style="margin:0" onclick="sw()">💬 Enviar pelo WhatsApp</button></div>';renderReview();}
+  vf();
+  if(n===2)setTimeout(()=>document.getElementById('nm')?.focus(),100);
+}
+function goStep(n){
+  if(n===2&&st()<40)return;
+  if(n===3){
+    const nm=document.getElementById('nm').value.trim();
+    const fn=document.getElementById('fn').value.trim();
+    const md=document.getElementById('md').value;
+    const bv=document.getElementById('bv').value.trim();
+    if(!nm||fn.length<11||(md==='entrega'&&bv.length<3))return;
+  }
+  showStep(n);
+  document.getElementById('db').scrollTop=0;
+}
+function renderReview(){
+  const nm=document.getElementById('nm').value.trim();
+  const fn=document.getElementById('fn').value.trim();
+  const md=document.getElementById('md').value;
+  const bv=document.getElementById('bv').value.trim();
+  const pg=document.getElementById('pg').value;
+  const obs=document.getElementById('obs').value.trim();
+  const arr=Object.values(C);
+  const itensHtml=arr.map(x=>'<div class="ri"><span class="l">'+x.q+'x '+x.n+'</span><span class="v">'+fm(x.p*x.q)+'</span></div>').join('');
+  const s=st();
+  const html='<h4>📦 Itens</h4>'+itensHtml+
+    '<h4 style="margin-top:18px">👤 Seus dados</h4>'+
+    '<div class="ri"><span class="l">Nome</span><span class="v">'+nm+'</span></div>'+
+    '<div class="ri"><span class="l">WhatsApp</span><span class="v">'+fn+'</span></div>'+
+    '<div class="ri"><span class="l">Modo</span><span class="v">'+(md==='entrega'?'🛵 Entrega':'🚶 Retirada')+'</span></div>'+
+    (md==='entrega'?'<div class="ri"><span class="l">Endereço</span><span class="v">'+bv+'</span></div>':'')+
+    '<div class="ri"><span class="l">Pagamento</span><span class="v">'+pg+'</span></div>'+
+    (obs?'<div class="ri"><span class="l">Observações</span><span class="v">'+obs+'</span></div>':'')+
+    '<h4 style="margin-top:18px">💰 Total</h4>'+
+    '<div class="ri"><span class="l">Subtotal</span><span class="v">'+fm(s)+'</span></div>'+
+    '<div class="ri"><span class="l">Taxa entrega</span><span class="v">'+(md==='entrega'?'a combinar':'sem taxa')+'</span></div>'+
+    '<div class="ri" style="margin-top:8px;padding-top:12px;border-top:2px solid var(--y)"><span class="l" style="font-size:15px">TOTAL</span><span class="v" style="font-size:18px;color:var(--y)">'+fm(s)+(md==='entrega'?' + entrega':'')+'</span></div>';
+  document.getElementById('revBox').innerHTML=html;
+}
 function rc(){
   const il=document.getElementById('ci');
   const ec=document.getElementById('ec');
-  const cf=document.getElementById('cf');
   const up=document.getElementById('up');
+  const obsBox=document.getElementById('obsBox');
   const arr=Object.values(C);
-  if(arr.length===0){ec.style.display='block';il.innerHTML='';cf.style.display='none';up.style.display='none';return}
+  if(arr.length===0){
+    ec.style.display='block';il.innerHTML='';up.style.display='none';
+    obsBox.style.display='none';
+    showStep(1);
+    document.getElementById('cf').style.display='block';
+    document.getElementById('minbar').style.display='none';
+    document.getElementById('continueBtn').disabled=true;
+    document.getElementById('st').textContent='R$ 0,00';
+    document.getElementById('tl').textContent='R$ 0,00';
+    return;
+  }
   ec.style.display='none';
-  cf.style.display='block';
+  obsBox.style.display='block';
   il.innerHTML=arr.map(x=>
     '<div class="ci"><div class="vi"><img src="'+x.i+'" alt=""></div>'+
     '<div class="nf"><h4>'+x.n+'</h4><div class="pp">'+fm(x.p)+' · '+fm(x.p*x.q)+' total</div>'+
@@ -633,19 +740,19 @@ function rc(){
   if(hc&&!h2L){
     up.style.display='block';
     document.getElementById('un').textContent='Coca-Cola 2L gelada';
-    document.getElementById('ud').textContent='Mesa completa por mais R$ 19,90. Combo sem refri 2L é meio combo.';
+    document.getElementById('ud').textContent='Mesa completa por mais R$ 19,90.';
     document.getElementById('upr').textContent='19,90';
     up.dataset.id='B01';
   }else if(!C['P01']&&arr.length>0){
     up.style.display='block';
     document.getElementById('un').textContent='Batata Rustica Grande';
-    document.getElementById('ud').textContent='Crocância em outro nível, com 1 molho. R$ 21.';
+    document.getElementById('ud').textContent='Crocancia em outro nivel + 1 molho. R$ 21.';
     document.getElementById('upr').textContent='21,00';
     up.dataset.id='P01';
   }else if(C['C01']&&!C['C02']&&arr.length>0){
     up.style.display='block';
     document.getElementById('un').textContent='Vire MEGA COMBO';
-    document.getElementById('ud').textContent='Adiciona Combo 2 e leva 32 pedaços (economia R$ 10).';
+    document.getElementById('ud').textContent='Adiciona Combo 2 e leva 32 pedacos (economia R$ 10).';
     document.getElementById('upr').textContent='76,00';
     up.dataset.id='C02';
   }else{up.style.display='none'}
@@ -656,25 +763,31 @@ function ut(){
   const s=st();
   const m=document.getElementById('md')?.value||'entrega';
   document.getElementById('st').textContent=fm(s);
-  if(m==='retirada'){
-    document.getElementById('tx').textContent='R$ 0,00 (retirada)';
-    document.getElementById('tl').textContent=fm(s);
-  }else{
-    document.getElementById('tx').textContent='a combinar';
-    document.getElementById('tl').textContent=fm(s)+' + entrega';
-  }
-  document.getElementById('br').style.display=m==='retirada'?'none':'block';
+  const tx=document.getElementById('tx');
+  const tl=document.getElementById('tl');
+  if(m==='retirada'){tx.textContent='R$ 0,00 (retirada)';tl.textContent=fm(s);}
+  else{tx.textContent='a combinar';tl.textContent=fm(s)+' + entrega';}
+  const br=document.getElementById('br');
+  if(br)br.style.display=m==='retirada'?'none':'block';
+  const mb=document.getElementById('minbar');
+  if(s>0&&s<40){mb.style.display='flex';document.getElementById('minDelta').textContent=fm(40-s);}
+  else{mb.style.display='none';}
   vf();
 }
 function vf(){
-  const nm=document.getElementById('nm')?.value.trim();
-  const fn=document.getElementById('fn')?.value.trim();
-  const bv=document.getElementById('bv')?.value.trim();
-  const md=document.getElementById('md')?.value;
+  const btn=document.getElementById('continueBtn');
+  if(!btn)return;
   const hi=Object.values(C).length>0;
   const min=st()>=40;
-  const ok=hi&&min&&nm&&fn.length>=11&&(md==='retirada'||bv.length>=3);
-  document.getElementById('sb').disabled=!ok;
+  if(STEP===1){btn.disabled=!(hi&&min);}
+  else if(STEP===2){
+    const nm=document.getElementById('nm').value.trim();
+    const fn=document.getElementById('fn').value.trim();
+    const bv=document.getElementById('bv').value.trim();
+    const md=document.getElementById('md').value;
+    const ok=nm&&fn.length>=11&&(md==='retirada'||bv.length>=3);
+    btn.disabled=!ok;
+  }
 }
 function oc(){
   document.getElementById('drw').classList.add('on');
@@ -699,14 +812,21 @@ function sw(){
   const bv=document.getElementById('bv').value.trim();
   const md=document.getElementById('md').value;
   const pg=document.getElementById('pg').value;
+  const obs=document.getElementById('obs').value.trim();
   const it=Object.values(C).map(x=>'• '+x.q+'x '+x.n+' — '+fm(x.p*x.q)).join('\n');
   const s=st();
-  const msg='🐔 *PEDIDO POLLO LOKO PRAÇA 8*\n\n*Cliente:* '+nm+'\n*WhatsApp:* '+fn+'\n'+
-    (md==='entrega'?'*Endereço:* '+bv:'*Modo:* Retirada (Av. Vila Matias, 205)')+
-    '\n*Pagamento:* '+pg+'\n\n*━━━━━━ ITENS ━━━━━━*\n'+it+'\n\n*━━━━━━━━━━━━━━━━━━*\nSubtotal: '+fm(s)+
-    (md==='entrega'?'\nTaxa entrega: a combinar':'\nSem taxa (retirada)')+
-    '\n*Total: '+fm(s)+(md==='entrega'?' + entrega*':'*')+
-    '\n\n_Pedido pelo site polloloko-praca8.vercel.app_ 🚀';
+  let msg='🐔 *PEDIDO POLLO LOKO PRAÇA 8*\n\n';
+  msg+='*Cliente:* '+nm+'\n';
+  msg+='*WhatsApp:* '+fn+'\n';
+  msg+=(md==='entrega'?'*Endereço:* '+bv:'*Modo:* Retirada (Av. Vila Matias, 205)')+'\n';
+  msg+='*Pagamento:* '+pg+'\n\n';
+  msg+='*━━━━━━ ITENS ━━━━━━*\n'+it+'\n\n';
+  msg+='*━━━━━━━━━━━━━━━━━━*\n';
+  msg+='Subtotal: '+fm(s)+'\n';
+  msg+=(md==='entrega'?'Taxa entrega: a combinar pelo WhatsApp':'Sem taxa (retirada)')+'\n';
+  msg+='*Total: '+fm(s)+(md==='entrega'?' + entrega*':'*')+'\n';
+  if(obs){msg+='\n*📝 Observações:*\n'+obs+'\n';}
+  msg+='\n_Pedido pelo site polloloko-praca8.vercel.app_ 🚀';
   window.open('https://wa.me/'+WA+'?text='+encodeURIComponent(msg),'_blank');
 }
 document.querySelectorAll('.cat-pill').forEach(t=>{
