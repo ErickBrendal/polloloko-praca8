@@ -1,23 +1,10 @@
-ID,Categoria,Nome,Descricao,Preco,Disponivel,Tempo Preparo (min),Tag
-C01,Combo,Combo Loko Familia,10 pedacos de frango + 2 batatas grandes + 1 refri 2L,89.90,TRUE,30,Mais Pedido
-C02,Combo,Combo Solo Bagaceiro,4 pedacos + batata media + refri lata,32.90,TRUE,20,Mais Pedido
-C03,Combo,Combo Sanduba Loko,Sanduiche de frango crocante + batata + refri,34.90,TRUE,18,
-C04,Combo,Balde do Loko,15 pedacos de frango + 3 molhos especiais,79.90,TRUE,28,Mais Pedido
-C05,Combo,Combo Apimentado,6 pedacos spicy + batata + refri lata,44.90,TRUE,22,
-C06,Combo,Combo Casal,8 pedacos + 2 batatas + 2 refris lata + 2 sobremesas,69.90,TRUE,25,
-F01,Frango,Frango Crocante Tradicional,Receita original Pollo Loko 1 peca,8.90,TRUE,15,
-F02,Frango,Frango Spicy,Apimentado nivel medio 1 peca,9.90,TRUE,15,
-F03,Frango,Frango Honey BBQ,Glaceado com molho doce defumado 1 peca,10.90,TRUE,17,
-F04,Frango,Tiras Empanadas,5 tiras crocantes com molho a escolha,24.90,TRUE,12,
-A01,Acompanhamento,Batata Loko Grande,Porcao XG com sal especial da casa,18.90,TRUE,8,Mais Pedido
-A02,Acompanhamento,Onion Rings,Cebola empanada crocante 10 aneis,16.90,TRUE,10,
-A03,Acompanhamento,Coleslaw,Salada de repolho cremosa estilo americano,12.90,TRUE,2,
-A04,Acompanhamento,Pao de Alho na Brasa,4 unidades douradas na hora,14.90,TRUE,6,
-B01,Bebida,Refri Lata Coca-Cola,350ml gelada,6.90,TRUE,0,
-B02,Bebida,Refri 2L Coca-Cola,Para a mesa toda,12.90,TRUE,0,
-B03,Bebida,Cerveja Long Neck Heineken,330ml super gelada,11.90,TRUE,0,
-B04,Bebida,Suco Natural Laranja,500ml feito na hora,9.90,TRUE,5,
-B05,Bebida,Agua Mineral,500ml com ou sem gas,4.90,TRUE,0,
-S01,Sobremesa,Sorvete Cremoso Baunilha,150ml com calda a escolha,9.90,TRUE,2,
-S02,Sobremesa,Cookie Recheado Choco,Quentinho com chocolate derretendo,7.90,TRUE,4,
-S03,Sobremesa,Cheesecake de Frutas Vermelhas,Fatia generosa gelada,14.90,TRUE,2,
+ID,Categoria,Nome,Descricao,Serve,Preco,Disponivel,Tag,Imagem URL
+C01,Combo,Combo 1 - Pollo Loko,~16 pedacos sortidos (coxa sobrecoxa asinha coxinha) empanados + batata rustica + 4 molhos,3 pessoas,76.00,TRUE,Mais Pedido,https://img0.didiglobal.com/static/soda_public/8399fd8a830ddc485b4fd7ad927f7923.jpg
+C02,Combo,Combo 2 - File de Peito,~16 pedacos de File de Sassami empanado + batata rustica grande + 4 molhos,3 pessoas,76.00,TRUE,Mais Pedido,https://img0.didiglobal.com/static/soda_public/img_e208907094c875613b3c848da997f18c.png
+C03,Combo,Combo 3 - Asinha e Coxinha,~16 pedacos de asinha e coxinha empanados + batata rustica + 4 molhos,3 pessoas,76.00,TRUE,,https://img0.didiglobal.com/static/soda_public/do1_B1gVKnKBt9jPpinWprSX1509111013
+C04,Combo,Combo 4 - Especial,~24 pedacos sortidos (peito coxa sobrecoxa asinha coxinha) + batata rustica + 4 molhos,4 a 5 pessoas,86.50,TRUE,Destaque,https://img0.didiglobal.com/static/soda_public/img_e208907094c875613b3c848da997f18c.png
+MEGA,Mega Combo,Mega Combo Loko 32 Pedacos,Combo 1 (Pollo Loko sortido) + Combo 2 (File de Peito) - 32 pedacos para a mesa toda,Ate 6 pessoas,142.00,TRUE,Promocao Site,https://img0.didiglobal.com/static/soda_public/8399fd8a830ddc485b4fd7ad927f7923.jpg
+M01,Meio Combo,1/2 Pollo Loko,~9 pedacos sortidos + batata pequena + 2 molhos,1 a 2 pessoas,56.50,TRUE,,https://img0.didiglobal.com/static/soda_public/img_ee0d3bdbab236b2b167f854bc3dd142e.jpg
+M02,Meio Combo,1/2 File de Peito,File de Sassami + batata pequena + 2 molhos (~9 pedacos),1 a 2 pessoas,56.50,TRUE,,https://img0.didiglobal.com/static/soda_public/img_e208907094c875613b3c848da997f18c.png
+M03,Meio Combo,1/2 Asinha e Coxinha,Asinha e coxinha + batata pequena + 2 molhos (~9 pedacos),1 a 2 pessoas,56.50,TRUE,,https://img0.didiglobal.com/static/soda_public/8399fd8a830ddc485b4fd7ad927f7923.jpg
+P01,Porca
